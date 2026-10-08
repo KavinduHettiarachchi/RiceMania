@@ -1,0 +1,372 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Ricemania design tokens
+ * Warm orange primary, charcoal ink, generous white space.
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-carrot-50: #fff6ed;
+  --color-carrot-100: #ffead4;
+  --color-carrot-200: #fed1a8;
+  --color-carrot-300: #fdb171;
+  --color-carrot-400: #fb8638;
+  --color-carrot-500: #f96a15;
+  --color-carrot-600: #ea4f0b;
+  --color-carrot-700: #c2390c;
+  --color-carrot-800: #9a2f12;
+  --color-carrot-900: #7c2912;
+
+  --color-ink-50: #f6f6f5;
+  --color-ink-100: #e7e7e5;
+  --color-ink-200: #d1d1cd;
+  --color-ink-300: #b0b0a9;
+  --color-ink-400: #88887f;
+  --color-ink-500: #6d6d64;
+  --color-ink-600: #575751;
+  --color-ink-700: #474743;
+  --color-ink-800: #3c3c39;
+  --color-ink-900: #1c1c1a;
+  --color-ink-950: #121211;
+
+  --color-cream: #fdfbf7;
+  --color-lime-glow: #eaf5b8;
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-ink-900);
+}
+
+* {
+  border-color: color-mix(in oklab, var(--color-ink-900) 8%, transparent);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-carrot-500);
+  color: #fff;
+}
+
+/* Slim, unobtrusive scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-200);
+  border-radius: 999px;
+  border: 3px solid var(--color-cream);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-300);
+}
+
+/* ------------------------------------------------------------------ *
+ * Keyframes
+ * ------------------------------------------------------------------ */
+@keyframes rm-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes rm-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rm-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rm-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(-1.5deg);
+  }
+}
+
+@keyframes rm-float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0);
+  }
+}
+
+@keyframes rm-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rm-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rm-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rm-steam {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) scaleX(1);
+  }
+  35% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-26px) scaleX(1.6);
+  }
+}
+
+@keyframes rm-pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes rm-bounce-in {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rm-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Animation utilities
+ * ------------------------------------------------------------------ */
+.animate-rise {
+  animation: rm-rise 0.8s var(--ease-out-soft) both;
+}
+.animate-fade {
+  animation: rm-fade 0.9s ease both;
+}
+.animate-scale-in {
+  animation: rm-scale-in 0.6s var(--ease-out-soft) both;
+}
+.animate-float {
+  animation: rm-float 6s ease-in-out infinite;
+}
+.animate-float-slow {
+  animation: rm-float-slow 9s ease-in-out infinite;
+}
+.animate-spin-slow {
+  animation: rm-spin-slow 26s linear infinite;
+}
+.animate-bounce-in {
+  animation: rm-bounce-in 0.5s var(--ease-spring) both;
+}
+.animate-slide-left {
+  animation: rm-slide-left 0.45s var(--ease-out-soft) both;
+}
+.animate-marquee {
+  animation: rm-marquee 32s linear infinite;
+}
+
+/* Stagger helpers — used on lists so children cascade in */
+.delay-1 {
+  animation-delay: 0.08s;
+}
+.delay-2 {
+  animation-delay: 0.16s;
+}
+.delay-3 {
+  animation-delay: 0.24s;
+}
+.delay-4 {
+  animation-delay: 0.32s;
+}
+.delay-5 {
+  animation-delay: 0.4s;
+}
+.delay-6 {
+  animation-delay: 0.48s;
+}
+.delay-7 {
+  animation-delay: 0.56s;
+}
+.delay-8 {
+  animation-delay: 0.64s;
+}
+
+/* ------------------------------------------------------------------ *
+ * Scroll reveal — elements start hidden, .is-visible is toggled by
+ * an IntersectionObserver in the Reveal component.
+ * ------------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 34px, 0);
+  transition:
+    opacity 0.85s var(--ease-out-soft),
+    transform 0.85s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ------------------------------------------------------------------ *
+ * Components
+ * ------------------------------------------------------------------ */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ink-100);
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.65),
+    transparent
+  );
+  animation: rm-shimmer 1.6s infinite;
+}
+
+/* Steam wisps rising off a hot dish */
+.steam {
+  position: absolute;
+  bottom: 100%;
+  width: 5px;
+  height: 26px;
+  border-radius: 999px;
+  background: linear-gradient(to top, rgb(255 255 255 / 0.85), transparent);
+  filter: blur(3px);
+  animation: rm-steam 3.4s ease-out infinite;
+}
+
+/* Underline that draws itself on hover */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out-soft);
+}
+.link-underline:hover::after,
+.link-underline[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Hide number input spinners in admin forms */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ------------------------------------------------------------------ *
+ * Accessibility
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

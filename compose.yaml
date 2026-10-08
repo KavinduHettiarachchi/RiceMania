@@ -1,0 +1,22 @@
+services:
+  ricemania:
+    image: ricemania:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ricemania
+    env_file:
+      - .env.local
+    environment:
+      HOSTNAME: 0.0.0.0
+      PORT: 3002
+    ports:
+      - "3002:3002"
+    volumes:
+      # Admin-uploaded food images are written to public/uploads at runtime.
+      # Without this they live only inside the container and vanish on rebuild.
+      - uploads:/app/public/uploads
+    restart: unless-stopped
+
+volumes:
+  uploads:

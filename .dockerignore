@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.log
+.next-dev-*
+.swc-*.tgz
+Dockerfile*
+README.md
