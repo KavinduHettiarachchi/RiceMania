@@ -99,7 +99,7 @@ export default function Hero() {
                 href="/menu"
                 className="group relative overflow-hidden rounded-full bg-ink-900 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-ink-900/15 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl"
               >
-                <span className="relative z-10">Order now</span>
+                <span className="relative z-10">ABC</span>
                 <span className="absolute inset-0 origin-left scale-x-0 bg-carrot-500 transition-transform duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
               </Link>
 
