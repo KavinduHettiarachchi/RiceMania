@@ -16,6 +16,9 @@ services:
       # Admin-uploaded food images are written to public/uploads at runtime.
       # Without this they live only inside the container and vanish on rebuild.
       - uploads:/app/public/uploads
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     restart: unless-stopped
 
 volumes:

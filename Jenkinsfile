@@ -46,6 +46,7 @@ pipeline {
             steps {
                 sh '''
                     docker build \
+                      --build-arg APP_VERSION="$IMAGE_TAG" \
                       -t "$DOCKERHUB_USR/$IMAGE_NAME:$IMAGE_TAG" \
                       -t "$DOCKERHUB_USR/$IMAGE_NAME:latest" .
                 '''

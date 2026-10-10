@@ -20,6 +20,10 @@ ENV MONGODB_URI=mongodb://localhost:27017/ricemania
 ENV JWT_SECRET=build-time-placeholder-not-a-real-secret
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Jenkins passes its build number here; Next.js inlines it at build time.
+ARG APP_VERSION=dev
+ENV NEXT_PUBLIC_APP_VERSION=$APP_VERSION
+
 RUN npm run build
 
 FROM node:20-alpine AS runner
