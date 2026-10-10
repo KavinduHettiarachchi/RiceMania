@@ -1,5 +1,5 @@
 # Run with:  docker compose -f jenkins/compose.yaml up -d --build
-# UI:        http://localhost:8080
+# UI:        http://localhost:8081  (8080 is taken by the Jenkins service installed in WSL)
 services:
   jenkins:
     build: .
@@ -9,11 +9,21 @@ services:
     # not for a shared Jenkins.
     user: root
     ports:
-      - "8080:8080"
+      - "8081:8080"
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./init.groovy.d:/var/jenkins_home/init.groovy.d:ro
+      # Becomes the "ricemania-env" credential on each start.
+      - ../.env.local:/run/secrets/ricemania.env:ro
+    # Docker Engine in WSL doesn't provide this name; the smoke test needs it.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Docker's default DNS can't resolve outside hosts on this machine.
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
     restart: unless-stopped
 
 volumes:
