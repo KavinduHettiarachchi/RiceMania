@@ -1,0 +1,20 @@
+# Run with:  docker compose -f jenkins/compose.yaml up -d --build
+# UI:        http://localhost:8080
+services:
+  jenkins:
+    build: .
+    image: ricemania-jenkins:latest
+    container_name: jenkins
+    # Root so the Docker CLI can use the host socket. Fine for a local lab,
+    # not for a shared Jenkins.
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:

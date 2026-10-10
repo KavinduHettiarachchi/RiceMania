@@ -10,3 +10,5 @@ node_modules
 .swc-*.tgz
 Dockerfile*
 README.md
+Jenkinsfile
+jenkins
